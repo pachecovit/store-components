@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import PropTypes, { bool, string, oneOf } from 'prop-types'
 import React, { memo } from 'react'
+import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { values } from 'ramda'
 import { injectIntl } from 'react-intl'
 import {
@@ -82,6 +83,12 @@ const InfoCard = ({
   isFullModeStyle,
   headline,
   subhead,
+  attributeTitle,
+  imageTitle,
+  imageAlt,
+  promotionId,
+  promotionName,
+  promotionPosition,
   callToActionMode,
   callToActionText,
   callToActionUrl,
@@ -101,6 +108,7 @@ const InfoCard = ({
   } = useRuntime()
 
   const { lazyLoad } = useExperimentalLazyImagesContext()
+  const { push } = usePixel()
 
   const { handles } = useCssHandles(CSS_HANDLES)
   const paddingClass =
@@ -168,11 +176,17 @@ const InfoCard = ({
 
   const subheadClasses = `${handles.infoCardSubhead} t-body mt6 c-on-base ${alignToken} mw-100`
 
+  const promotionEventData = {
+    id: promotionId,
+    name: promotionName,
+    position: promotionPosition,
+  }
+
   return (
     <LinkWrapper
       imageActionUrl={formatIOMessage({ id: imageActionUrl, intl })}
       extraCondition={!isFullModeStyle}
-      linkProps={{ className: linkWrapperClasses, target: linkTarget }}
+      linkProps={{ className: linkWrapperClasses, target: linkTarget, title: attributeTitle }}
     >
       <div
         className={containerClasses}
@@ -223,8 +237,10 @@ const InfoCard = ({
                 className={handles.infoCardImage}
                 src={finalImageUrl}
                 style={{ objectFit: 'cover' }}
-                alt=""
+                title={imageTitle}
+                alt={imageAlt}
                 data-testid="half-image"
+                onClick={() => { push({ event: 'promotionClick', promotions: [promotionEventData] }) }}
               />
             </LinkWrapper>
           </div>
@@ -242,6 +258,12 @@ MemoizedInfoCard.propTypes = {
   textPosition: oneOf(getEnumValues(textPositionTypes)),
   headline: string,
   subhead: string,
+  attributeTitle: string,
+  imageTitle: string,
+  imageAlt: string,
+  promotionId: string,
+  promotionName: string,
+  promotionPosition: string,
   callToActionMode: oneOf(getEnumValues(callToActionModeTypes)),
   callToActionText: string,
   callToActionUrl: string,
@@ -262,6 +284,12 @@ MemoizedInfoCard.defaultProps = {
   textPosition: textPositionTypes.TEXT_POSITION_LEFT.value,
   headline: '',
   subhead: '',
+  attributeTitle: '',
+  imageTitle: '',
+  imageAlt: '',
+  promotionId: string,
+  promotionName: string,
+  promotionPosition: string,
   callToActionMode: callToActionModeTypes.CALL_ACTION_BUTTON.value,
   callToActionText: '',
   callToActionUrl: '',
@@ -325,6 +353,48 @@ MemoizedInfoCard.schema = {
       title: 'admin/editor.blockClass.title',
       description: 'admin/editor.blockClass.description',
       type: 'string',
+      isLayout: true,
+    },
+    attributeTitle: {
+      title: 'admin/editor.info-card.attributeTitle.title',
+      description: 'admin/editor.info-card.attributeTitle.description',
+      type: 'string',
+      default: '',
+      isLayout: true,
+    },
+    imageTitle: {
+      title: 'admin/editor.info-card.imageTitle.title',
+      description: 'admin/editor.info-card.imageTitle.description',
+      type: 'string',
+      default: '',
+      isLayout: true,
+    },
+    imageAlt: {
+      title: 'admin/editor.info-card.imageAlt.title',
+      description: 'admin/editor.info-card.imageAlt.description',
+      type: 'string',
+      default: '',
+      isLayout: true,
+    },
+    promotionId: {
+      title: 'admin/editor.info-card.promotionId.title',
+      description: 'admin/editor.info-card.promotionId.description',
+      type: 'string',
+      default: '',
+      isLayout: true,
+    },
+    promotionName: {
+      title: 'admin/editor.info-card.promotionName.title',
+      description: 'admin/editor.info-card.promotionName.description',
+      type: 'string',
+      default: '',
+      isLayout: true,
+    },
+    promotionPosition: {
+      title: 'admin/editor.info-card.promotionPosition.title',
+      description: 'admin/editor.info-card.promotionPosition.description',
+      type: 'string',
+      default: '',
       isLayout: true,
     },
   },

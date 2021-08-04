@@ -14,6 +14,42 @@
           "$ref": "app:vtex.native-types#/definitions/text",
           "default": ""
         },
+        "attributeTitle": {
+          "title": "admin/editor.info-card.attributeTitle.title",
+          "description": "admin/editor.info-card.attributeTitle.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "imageTitle": {
+          "title": "admin/editor.info-card.imageTitle.title",
+          "description": "admin/editor.info-card.imageTitle.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "imageAlt": {
+          "title": "admin/editor.info-card.imageAlt.title",
+          "description": "admin/editor.info-card.imageAlt.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "promotionId": {
+          "title": "admin/editor.info-card.promotionId.title",
+          "description": "admin/editor.info-card.promotionId.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "promotionName": {
+          "title": "admin/editor.info-card.promotionName.title",
+          "description": "admin/editor.info-card.promotionName.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "promotionPosition": {
+          "title": "admin/editor.info-card.promotionPosition.title",
+          "description": "admin/editor.info-card.promotionPosition.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
         "callToActionText": {
           "title": "admin/editor.info-card.callToActionText.title",
           "description": "admin/editor.info-card.callToActionText.description",
